@@ -1,0 +1,16 @@
+
+# ifndef KERNEL_H
+# define KERNEL_H
+# endif
+
+// Ekran adresini tanımlar
+
+# ifndef VGA_ADRES
+# define VGA_ADRES 0xB8000
+# endif
+
+# define r0 0x00
+# define 	// Siyah üzerine siyah
+# define r2 0x02
+# define r4 0x04	// Siyah üzerine kırmızı
+# define r6 0x06
