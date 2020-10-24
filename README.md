@@ -1,6 +1,10 @@
-# Sistemim
+# Açıklama
 
-Bu depo, kendi yazdığımı işletim sistemi kodlarını içerir.
+Bu küçük işletim sistemi, C ve Assembly dillerinde çoğunlukla kendim yazdığım kodlardan oluşur.
 
-Kararlı değildir. Sanal makine kullanın. Bilgisayarda doğrudan çalıştırmayın.
-Aksi takdirde sorumluluk size aittir.
+"iso" klasörü içerisinde bulunan "kernel.iso" dosyasını sanal makine üzerinde çalıştırabilirsiniz.
+
+Bilgisayarınızda doğrudan çalıştırmayın. Aksi takdirde bilgisayarınız zarar görebilir.
+
+Hiçbir garantisi yoktur ve sorumluluk kabul etmem.
+Bilginize.
