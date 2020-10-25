@@ -10,6 +10,10 @@
 # include "harf.h"
 # endif
 
+# ifndef PORT_H
+# include "port.h"
+# endif
+
 // Ekran adresini tanımlar
 
 # ifndef VGA_ADRES
@@ -21,9 +25,6 @@
 # ifndef KLAVYE_ADRES
 # define KLAVYE_ADRES 0x60
 # endif
-
-enum renk {r0, r1, r2, r3, r4};		// renkler
-
 
 // genel değişkenler
 
@@ -146,18 +147,6 @@ void uyut(uint32_t say)		// Sisetemi say değeri kadar bekletir.
 	}
 }
 
-void outb(uint16_t port, uint8_t data)		// port adresine veri gönderir
-{
-	asm volatile("outb %0, %1" : "=a"(data) : "d"(port));
-}
-
-uint8_t inb(uint16_t port)		// Verilen port adresinden veri alır.
-{
-	uint8_t ret;
-	asm volatile("inb %1, %0" : "=a"(ret) : "d"(port));
-	return ret;
-}
-
 void itoc(uint32_t integer, uint8_t * ascii)		// Sayıyı yazıya çevirir.
 {
 	uint32_t temp ,count=0, i, cnd=0;
@@ -278,3 +267,4 @@ void _2b_girdi(n1 np, uint8_t * str)
 
 	return;
 }
+

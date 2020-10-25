@@ -10,7 +10,8 @@ GRUB_PATH := $(BOOT_PATH)/grub
 ISO_PATH := $../../iso/
 
 
-kernel.iso: kernel
+
+kernel.iso: kernel kernel.o
 	$(MKDIR) $(GRUB_PATH)
 	$(MKDIR) $(ISO_PATH)
 	$(CP) $(BIN) $(BOOT_PATH)
@@ -21,7 +22,7 @@ kernel.iso: kernel
 boot.o: boot.asm
 	nasm -f elf32 boot.asm -o boot.o
 
-kernel.o: kernel.c include
+kernel.o: kernel.c include/kabuk.c include/kernel.h
 	gcc -m32 -c kernel.c -o kernel.o
 
 kernel: linker.ld boot.o kernel.o
