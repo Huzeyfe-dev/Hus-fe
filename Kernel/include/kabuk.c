@@ -2,7 +2,79 @@
 # include "string.h"
 # endif
 
-extern void shutdown();
+# ifndef TYPE_H
+# include "type.h"
+# endif
+
+# ifndef EKRAN_H
+# include "ekran.h"
+# endif
+
+typedef struct
+{
+	n1 * np;
+	uint32_t imlec;
+	uint32_t satir;
+	uint32_t sutun;
+}n2;
+
+
+
+// yeni fonksiyon
+
+
+void n2_print(n2 * np, uint8_t * str)
+{
+	n1 * tmp = np->np;
+	np->imlec = 80*(tmp->satir+np->satir) + tmp->sutun + np->sutun;
+
+
+	uint16_t index=0;
+	//uint32_t i=0;; // sütun için
+
+	while(str[index])
+	{
+		if(str[index]=='\n')
+		{
+			np->satir++;
+			np->imlec = (np->satir+tmp->satir)*80 + tmp->sutun;
+			np->sutun = 0;
+		}
+		
+		else
+		{
+			terminal[np->imlec] = (uint8_t) str[index] | (uint16_t) tmp->renk << 8;
+			np->imlec++;
+			np->sutun++;
+		}
+		
+		index++;
+		
+		if(np->sutun==tmp->en)
+		{
+			np->satir++;
+			np->imlec = (np->satir+tmp->satir)*80 + tmp->sutun;
+			np->sutun=0;;
+		}
+
+		if(np->satir==tmp->boy)
+		{
+			ciz(*tmp);
+			np->satir=0;
+			np->imlec = tmp->satir*80 + tmp->sutun;
+			np->sutun=0;
+		}
+	}
+}
+
+
+
+
+
+void help(uint8_t * str)
+{
+	str = "Help\nCommands:\n- hlt : halts the cpu\n- help: shows these help";
+}
 
 void hlt()
 {
@@ -10,35 +82,47 @@ void hlt()
 }
 
 
-char dene(uint8_t * str)
+char dene(uint8_t * str, uint8_t * ckt)
 {
 	if (kiyasla(str, "hlt")==1) hlt();
-	//if (kiyasla(str, "std")==1) shutdown();
+	else if (kiyasla(str, "help")==1)
+	{
+		ckt = "Help\nCommands:\n- hlt : halts the cpu\n- help: shows these help";
+		ckt[49]='\0';
+		return 1;
+	}
 	return 0;
 }
 
-void gir(n1 nn, n1 mm)
+// eski fonksiyon
+
+void gir(n1 nn, n2 * nn2)
 {
 	uint8_t * str;
 	uint8_t * ckt;
 
-	_2b_girdi(nn,str);
-	y_ciz(nn,str);
-	
-	char ret = dene(str);
-	
-	if(ret==0) ckt = "kod taninmadi.";
+	for(short i; i<50;i++)
+	{
+		str[i] = ' ';
+		ckt[i] = ' ';
+	}
 
-	/*if(ret==0) ckt="Hata var.";
-	if(ret==1) ckt="Yazilar esit.";
-	if(ret==2) ckt="Yazilarin sadece uzunluklari esit.";
-	if(ret==3) ckt="Ilk yazi ikinciden uzun.";
-	if(ret==4) ckt="Ikinci yazi birinciden uzun.";
-	*/
+	_2b_girdi(nn,str);
+	//y_ciz(nn,str);
 	
-	y_ciz(mm,ckt);
+	char ret = dene(str, ckt);
+	
+	if(ret==0)
+	{
+		n2_print(nn2, "kod taninmadi:");
+		n2_print(nn2, str);
+		n2_print(nn2, "\n");
+	}
+	else
+	{
+		n2_print(nn2, ckt);
+	}
+	//y_ciz(mm,ckt);
 
 	uyut(0x02FFFFFF);
 }
-
-

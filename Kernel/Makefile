@@ -22,7 +22,7 @@ kernel.iso: kernel kernel.o
 boot.o: boot.asm
 	nasm -f elf32 boot.asm -o boot.o
 
-kernel.o: kernel.c include/kabuk.c include/kernel.h
+kernel.o: kernel.c include/kabuk.c include/ekran.h
 	gcc -m32 -c kernel.c -o kernel.o
 
 kernel: linker.ld boot.o kernel.o

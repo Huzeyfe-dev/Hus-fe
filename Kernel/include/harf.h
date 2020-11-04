@@ -35,9 +35,9 @@
 #define SPACE 0x39
 #define ENTER 0x1C
 #define ESC 0x01
+#define BACKSPACE 0x0E
 
-uint8_t h_deger[] = 
-{
+uint8_t h_deger[] = {
 
 KEY_A, KEY_B, KEY_C,
 KEY_D, KEY_E, KEY_F,
@@ -47,16 +47,15 @@ KEY_M, KEY_N, KEY_O,
 KEY_P, KEY_Q, KEY_R,
 KEY_S, KEY_T, KEY_U,
 KEY_V, KEY_W, KEY_X,
-KEY_Y, KEY_Z, SPACE 
-
-};
+KEY_Y, KEY_Z, SPACE };
 
 uint8_t harfler[] = {
 'a','b','c','d','e',
 'f','g','h','i','j',
 'k','l','m','n','o',
 'p','q','r','s','t',
-'u','v','w','x','y','z',' '};
+'u','v','w','x','y',
+'z',' '};
 
 uint8_t shc(uint8_t deger) // Sayidan Harfe Çevir = shc
 {
